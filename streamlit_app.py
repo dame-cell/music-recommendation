@@ -66,16 +66,15 @@ st.sidebar.header("Don't forget to check out the vizualization")
 
 file_path = r"F:\mlops0\data\filtered_data.csv"
 
-
-@st.cache_data()
+@st.cache
 def reading_data_st(file_path):
     df = read_the_data(file_path)
     clean_df = cleaning_the_data(df)
-    uniuqe_year = clean_df['year'].unique()
-    return clean_df , uniuqe_year
+    unique_year = clean_df['year'].unique()
+    return clean_df, unique_year
 
+clean_df, unique_year = reading_data_st(file_path)
 
-clean_df,uniuqe_year =reading_data_st(file_path)
 def Home(df):
     with st.expander("⏰ My Excel WorkBook"):
         showData = st.multiselect('Filter: ', df.columns,
