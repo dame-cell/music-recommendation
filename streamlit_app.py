@@ -64,7 +64,7 @@ with st.sidebar.expander("About"):
 
 st.sidebar.header("Don't forget to check out the vizualization")
 
-file_path = r"F:\mlops0\data\filtered_data.csv"
+file_path = "data/filtered_data.csv"
 
 @st.cache
 def reading_data_st(file_path):
