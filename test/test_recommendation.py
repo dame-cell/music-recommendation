@@ -5,19 +5,9 @@ import pandas  as pd
 from data.data_ingestion import read_the_data
 from src.data_cleaning import cleaning_the_data
 from src.recommendation import RecommendationEngine , SongRecommendation_artist_songs ,RecommendationEngine_forsongs
-from dotenv import load_dotenv
-import os 
 
-load_dotenv()
 
-raw_file_path = os.environ.get("MY_FILE_PATH")
-
-if raw_file_path:
-    file_path = eval(raw_file_path)
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = file.read()
-else:
-    print("Environment variable MY_FILE_PATH is not set.")
+file_path = r"F:\mlops0\data\filtered_data.csv"
 
 @pytest.fixture
 def recommendation_engine():

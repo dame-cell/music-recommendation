@@ -16,7 +16,7 @@ from numerize.numerize import numerize
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+
 
 
 
@@ -66,15 +66,7 @@ with st.sidebar.expander("About"):
 
 st.sidebar.header("Don't forget to check out the vizualization")
 
-raw_file_path = os.environ.get("MY_FILE_PATH")
-
-if raw_file_path:
-    file_path = eval(raw_file_path)
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = file.read()
-        
-else:
-    print("Environment variable MY_FILE_PATH is not set.")
+file_path = r"F:\mlops0\data\filtered_data.csv"
 
 
 @st.cache_data()
