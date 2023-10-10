@@ -15,7 +15,7 @@ from numerize.numerize import numerize
 from dotenv import load_dotenv
 import os
 
-
+load_dotenv()
 
 
 
@@ -65,18 +65,17 @@ with st.sidebar.expander("About"):
 
 st.sidebar.header("Don't forget to check out the vizualization")
 
+raw_file_path = os.environ.get("MY_FILE_PATH")
 
-# Load environment variables from the .env file
-load_dotenv()
-
-# Access the MY_FILE_PATH environment variable
-file_path = os.environ.get("MY_FILE_PATH")
-
-if file_path:
-    print(f"File path from .env: {file_path}")
+if raw_file_path:
+    file_path = eval(raw_file_path)
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = file.read()
+        print(f"File data: {data}")
 else:
     print("Environment variable MY_FILE_PATH is not set.")
 
+    
 @st.cache_data()
 def reading_data_st(file_path):
     df = pd.read_csv(file_path)

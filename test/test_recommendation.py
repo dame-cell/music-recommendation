@@ -8,14 +8,15 @@ from src.recommendation import RecommendationEngine , SongRecommendation_artist_
 from dotenv import load_dotenv
 import os 
 
-# Load environment variables from the .env file
 load_dotenv()
 
-# Access the MY_FILE_PATH environment variable
-file_path = os.environ.get("MY_FILE_PATH")
+raw_file_path = os.environ.get("MY_FILE_PATH")
 
-if file_path:
-    print(f"File path from .env: {file_path}")
+if raw_file_path:
+    file_path = eval(raw_file_path)
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = file.read()
+        print(f"File data: {data}")
 else:
     print("Environment variable MY_FILE_PATH is not set.")
 
