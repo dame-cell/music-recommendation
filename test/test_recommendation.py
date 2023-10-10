@@ -7,6 +7,7 @@ from src.data_cleaning import cleaning_the_data
 from src.recommendation import RecommendationEngine , SongRecommendation_artist_songs ,RecommendationEngine_forsongs
 
 
+file_path = r"data\filtered_data.csv"
 
 @pytest.fixture
 def recommendation_engine():

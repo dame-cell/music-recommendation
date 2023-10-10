@@ -12,6 +12,7 @@ from src.visualization import (comparing_the_yearly_growth , create_pie_chart ,
                                 plotting_most_popular_artist)
 
 from numerize.numerize import numerize
+from dotenv import load_dotenv
 import os
 
 
@@ -63,7 +64,18 @@ with st.sidebar.expander("About"):
     st.markdown("Please keep in mind the recommendations are limited to 2022") 
 
 st.sidebar.header("Don't forget to check out the vizualization")
-file_path = 'F:\mlops2\data\spotify_data.csv'
+
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# Access the MY_FILE_PATH environment variable
+file_path = os.environ.get("MY_FILE_PATH")
+
+if file_path:
+    print(f"File path from .env: {file_path}")
+else:
+    print("Environment variable MY_FILE_PATH is not set.")
 
 @st.cache_data()
 def reading_data_st(file_path):
