@@ -161,20 +161,20 @@ with tab1:
 with tab2:
     st.header("Visualization")
     artists_viz = st.text_input("enter your desired artists for visualization (comma-separated)", value=default_artists)
-    artists_input_lowercase = artists_input.lower()
+    artists_input_lowercase = artists_viz.lower()
     choice_of_year = clean_df['year'].unique()
     desired_year = st.selectbox("enter the desired year for visualization ",choice_of_year)
     col1, col2 = st.columns(2)
 
     if st.button("Visualize"):
-        artists_list = [artist.strip() for artist in artists_viz.split(",")]
+        artists_list = [artist.strip() for artist in artists_input_lowercase.split(",")]
         if not artists_list:
             st.warning('Please enter at least one artist.')
         elif len(artists_list) > 4:
             st.warning('You can select up to 4 artists for visualization.')
         else:
             st.markdown("### Yearly Growth Comparison")
-            fig_1 = comparing_the_yearly_growth(clean_df, artists_input_lowercase)
+            fig_1 = comparing_the_yearly_growth(clean_df, artists_list)
             st.pyplot(fig_1)
             
             for i, artist in enumerate(artists_list):
