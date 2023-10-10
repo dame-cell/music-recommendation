@@ -5,9 +5,19 @@ import pandas  as pd
 from data.data_ingestion import read_the_data
 from src.data_cleaning import cleaning_the_data
 from src.recommendation import RecommendationEngine , SongRecommendation_artist_songs ,RecommendationEngine_forsongs
+from dotenv import load_dotenv
+import os 
 
+# Load environment variables from the .env file
+load_dotenv()
 
-file_path = r"data\filtered_data.csv"
+# Access the MY_FILE_PATH environment variable
+file_path = os.environ.get("MY_FILE_PATH")
+
+if file_path:
+    print(f"File path from .env: {file_path}")
+else:
+    print("Environment variable MY_FILE_PATH is not set.")
 
 @pytest.fixture
 def recommendation_engine():
