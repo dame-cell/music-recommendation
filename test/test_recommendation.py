@@ -16,7 +16,6 @@ if raw_file_path:
     file_path = eval(raw_file_path)
     with open(file_path, "r", encoding="utf-8") as file:
         data = file.read()
-        print(f"File data: {data}")
 else:
     print("Environment variable MY_FILE_PATH is not set.")
 

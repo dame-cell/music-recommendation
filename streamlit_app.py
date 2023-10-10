@@ -11,6 +11,7 @@ from src.visualization import (comparing_the_yearly_growth , create_pie_chart ,
                                 finding_the_most_popular_artist,
                                 plotting_most_popular_artist)
 
+from data.data_ingestion import read_the_data
 from numerize.numerize import numerize
 from dotenv import load_dotenv
 import os
@@ -71,14 +72,14 @@ if raw_file_path:
     file_path = eval(raw_file_path)
     with open(file_path, "r", encoding="utf-8") as file:
         data = file.read()
-        print(f"File data: {data}")
+        
 else:
     print("Environment variable MY_FILE_PATH is not set.")
 
-    
+
 @st.cache_data()
 def reading_data_st(file_path):
-    df = pd.read_csv(file_path)
+    df = read_the_data(file_path)
     clean_df = cleaning_the_data(df)
     uniuqe_year = clean_df['year'].unique()
     return clean_df , uniuqe_year
@@ -136,23 +137,20 @@ with tab1:
     with st.form("recommendation_form"):
         artist = st.text_input("Please enter your desired artist", value=default_recommendation_artist)
         track_name = st.text_input("Please enter your desired song")
-        recommendation_type = st.selectbox("Select recommendation type", ["By Artist", "By Song", "By Both"])
+        recommendation_type = st.selectbox("Select recommendation type", ["By Artist", "By Song"])
 
         if st.form_submit_button("Recommend"):
             if recommendation_type == "By Artist" and not artist:
                 st.warning("Please enter the desired artist.")
             elif recommendation_type == "By Song" and not track_name:
                 st.warning("Please enter the desired song.")
-            elif recommendation_type == "By Both" and (artist == default_recommendation_artist or not track_name):
-                st.warning("Please enter both the artist and the song.")
             else:
                 recommendations = None
                 if recommendation_type == "By Artist":
                     recommendations = recommendation_engine.recommend_songs_by_artist(input_cleaning(artist))
                 elif recommendation_type == "By Song":
                     recommendations = recommendation_engine_for_songs.recommend_songs_on_songs(input_cleaning(track_name))
-                elif recommendation_type == "By Both":
-                    recommendations = recommendation_engine_for_songs_artist.recommend_similar_songs_artist(input_cleaning(artist), input_cleaning(track_name))
+                
 
                 # Display recommendations as cards
                 if recommendations is not None and not recommendations.empty:
