@@ -12,9 +12,7 @@ from src.visualization import (comparing_the_yearly_growth , create_pie_chart ,
                                 plotting_most_popular_artist)
 
 from data.data_ingestion import read_the_data
-from numerize.numerize import numerize
-from dotenv import load_dotenv
-import os
+
 
 
 
@@ -78,8 +76,6 @@ def reading_data_st(file_path):
 
 
 clean_df,uniuqe_year =reading_data_st(file_path)
-
-
 def Home(df):
     with st.expander("⏰ My Excel WorkBook"):
         showData = st.multiselect('Filter: ', df.columns,

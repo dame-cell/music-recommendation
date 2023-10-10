@@ -15,10 +15,12 @@ def recommendation_engine():
     
     data = read_the_data(file_path)
     clean_data = cleaning_the_data(data)
+    uniuqe_year = clean_data['year'].unique()
+    print("uniuqe_year :",uniuqe_year)
     recommend = RecommendationEngine(clean_data)
     recommend_songs = RecommendationEngine_forsongs(clean_data)
     recommend_songs_and_artist = SongRecommendation_artist_songs(clean_data)
-    return recommend, recommend_songs , recommend_songs_and_artist
+    return recommend, recommend_songs , recommend_songs_and_artist,uniuqe_year
    
 def test_recommend_songs_by_artist_empty(recommendation_engine):
     # Test when the specified artist does not exist in the dataset
