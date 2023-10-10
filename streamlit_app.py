@@ -54,7 +54,7 @@ st.markdown("""
 st.markdown("<h1 class='neon-text'>Tune Tease</h1>", unsafe_allow_html=True)
 
 st.sidebar.title("Tune Tease")
-st.sidebar.markdown("Made by [Dame rajee](https://twitter.com/damerajee44)")
+
 
 with st.sidebar.expander("About"):
     st.markdown("This is a music recommendation app that helps you discover new songs based on your preferences.")
@@ -161,6 +161,7 @@ with tab1:
 with tab2:
     st.header("Visualization")
     artists_viz = st.text_input("enter your desired artists for visualization (comma-separated)", value=default_artists)
+    artists_input_lowercase = artists_input.lower()
     choice_of_year = clean_df['year'].unique()
     desired_year = st.selectbox("enter the desired year for visualization ",choice_of_year)
     col1, col2 = st.columns(2)
@@ -173,7 +174,7 @@ with tab2:
             st.warning('You can select up to 4 artists for visualization.')
         else:
             st.markdown("### Yearly Growth Comparison")
-            fig_1 = comparing_the_yearly_growth(clean_df, artists_list)
+            fig_1 = comparing_the_yearly_growth(clean_df, artists_input_lowercase)
             st.pyplot(fig_1)
             
             for i, artist in enumerate(artists_list):
